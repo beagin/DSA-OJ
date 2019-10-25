@@ -8,7 +8,7 @@
 #include <vector>
 #include <string>
 using namespace std;
-constexpr int MAXNUM = 10000;
+const int MAXNUM = 10000;
 int postOrder[MAXNUM], inOrder[MAXNUM], preOrder[MAXNUM];
 
 /* 根据中序和后序序列得到前序
@@ -35,10 +35,12 @@ void getPre(int sindex_in, int eindex_in, int sindex_post, int eindex_post) {
         return;
     }
     /// 获取后根序列中的左右子树
-    int len_left = root_in - sin
-    // 进行递归
-    
-
+    int len_left = root_in - sindex_in;                 // 左子树长度
+    int len_right = eindex_in - len_left - sindex_in;   // 右子树长度
+    /// 进行递归
+    getPre(sindex_in, root_in-1, sindex_post, sindex_post+len_left-1);  // 左子树
+    getPre(root_in+1, eindex_in, sindex_post+len_left, eindex_post-1);  // 右子树
+    return;
 }
 
 
@@ -53,8 +55,9 @@ int main(int argc, char const *argv[])
         if (cin.get() != ' ')
             break;
 
-    /// 
-
+    /// 开始递归
+    getPre(0, i-1, 0, i-1);
+    cout << endl;
     return 0;
 }
 
